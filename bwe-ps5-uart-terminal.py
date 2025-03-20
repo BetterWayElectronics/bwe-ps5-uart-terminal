@@ -7,7 +7,7 @@ import os
 import re
 import time
 
-version = "1.0.1"
+version = "1.0.2"
 
 def print_banner():
     print(Fore.BLACK + Back.CYAN + "*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-*")
@@ -170,8 +170,48 @@ def uart_terminal():
                 sys.stdout.flush()
 
                 command = input().strip().lower()  # Get the user input
+                
+                if command == '!break':
+                    print(Fore.YELLOW + "Sending Serial Break" + Style.RESET_ALL)
+                    ser.send_break()
+                    continue  # Skip further processing of the !break command
 
-                if command.lower() == 'exit':
+                elif command == '!dtr_on':
+                    print(Fore.YELLOW + "DTR Enabled" + Style.RESET_ALL)
+                    ser.setDTR(True)
+                    continue
+
+                elif command == '!dtr_off':
+                    print(Fore.YELLOW + "DTR Disabled" + Style.RESET_ALL)
+                    ser.setDTR(False)
+                    continue
+
+                elif command == '!rts_on':
+                    print(Fore.YELLOW + "RTS Enabled" + Style.RESET_ALL)
+                    ser.setRTS(True)
+                    continue
+
+                elif command == '!rts_off':
+                    print(Fore.YELLOW + "RTS Disabled" + Style.RESET_ALL)
+                    ser.setRTS(False)
+                    continue              
+                    
+                elif command == '!flush':
+                    print(Fore.YELLOW + "Serial Flush" + Style.RESET_ALL)
+                    ser.setRTS(False)
+                    continue   
+                    
+                elif command == '!resetin':
+                    print(Fore.YELLOW + "Input Butter Cleared" + Style.RESET_ALL)
+                    ser.setRTS(False)
+                    continue                
+                
+                elif command == '!resetout':
+                    print(Fore.YELLOW + "Output Butter Cleared" + Style.RESET_ALL)
+                    ser.setRTS(False)
+                    continue
+
+                elif command == 'exit':
                     print(Fore.YELLOW + "Exiting UART Terminal." + Style.RESET_ALL)
                     keep_listening = False
                     ser.close()
