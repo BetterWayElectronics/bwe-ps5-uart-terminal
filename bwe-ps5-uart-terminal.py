@@ -202,12 +202,12 @@ def uart_terminal():
                     continue   
                     
                 elif command == '!resetin':
-                    print(Fore.YELLOW + "Input Butter Cleared" + Style.RESET_ALL)
+                    print(Fore.YELLOW + "Input Buffer Cleared" + Style.RESET_ALL)
                     ser.setRTS(False)
                     continue                
                 
                 elif command == '!resetout':
-                    print(Fore.YELLOW + "Output Butter Cleared" + Style.RESET_ALL)
+                    print(Fore.YELLOW + "Output Buffer Cleared" + Style.RESET_ALL)
                     ser.setRTS(False)
                     continue
 
